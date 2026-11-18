@@ -12,7 +12,12 @@
           "package_name": "com.example.firebase_crudnote"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "822371879216-mtc2cm0lv80al3ek8r0link5fktjm6ar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB2mw-gaEreiJIyD3gVKmbLGZvyJuooVjU"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822371879216-mtc2cm0lv80al3ek8r0link5fktjm6ar.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "822371879216-fdosc4p5p48aq75h4c74v5g200lp19mh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firebaseCrudnote"
+              }
+            }
+          ]
         }
       }
     }

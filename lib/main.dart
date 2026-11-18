@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crudnote/firebase_options.dart';
-import 'package:firebase_crudnote/home_page.dart';
+import 'package:firebase_crudnote/login_page.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Firebase CRUD Notes',
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: const LoginPage(),
     );
   }
 }

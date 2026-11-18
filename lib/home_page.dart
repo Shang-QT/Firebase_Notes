@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_crudnote/auth_service.dart';
 import 'package:firebase_crudnote/crud_service.dart';
+import 'package:firebase_crudnote/login_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,18 +27,15 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.teal,
         actions: [
           IconButton(
-            onPressed: () {
-              setState(() {
-                showFavoritesOnly = !showFavoritesOnly;
-              });
-            },
-            // Icon changes based on filter state
-            icon: Icon(
-              showFavoritesOnly ? Icons.favorite : Icons.favorite_border,
-              color: Colors.white,
-            ),
-            tooltip: 'Filter Favorites',
-          ),
+              icon: Icon(Icons.logout),
+              onPressed: () {
+              AuthService().signOut();
+              Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => LoginPage()),
+            );
+          },
+         ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
