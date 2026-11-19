@@ -27,6 +27,19 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.teal,
         actions: [
           IconButton(
+            onPressed: () {
+              setState(() {
+                showFavoritesOnly = !showFavoritesOnly;
+              });
+            },
+            // Icon changes based on filter state
+            icon: Icon(
+              showFavoritesOnly ? Icons.favorite : Icons.favorite_border,
+              color: Colors.white,
+            ),
+            tooltip: 'Filter Favorites',
+          ),
+          IconButton(
               icon: Icon(Icons.logout),
               onPressed: () {
               AuthService().signOut();
