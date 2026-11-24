@@ -1,22 +1,53 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
+import 'package:image_picker/image_picker.dart';
+
+class PickedImage{
+  final File file;
+  final String url;
+  PickedImage({required this.file, required this.url});
+}
 
 class CrudService {
-  final CollectionReference items = FirebaseFirestore.instance.collection(
-    'items',
-  );
+  final CollectionReference items =
+  FirebaseFirestore.instance.collection('items');
 
-  Future<void> addItems(String name, int quantity) {
-    // Create item
-    return items.add({
-      'name': name,
-      'quantity': quantity,
-      'created_at': Timestamp.now(),
-      'is_favorite': false,
-    });
+  final CloudinaryPublic _cloudinary = CloudinaryPublic(
+    'qcelhqpe', 'flutter_notes_preset',
+    cache: false,
+    );
+
+  final ImagePicker _picker = ImagePicker();
+
+  Future<PickedImage?> pickImageForAddItem() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile == null) return null;
+
+    final file = File(pickedFile.path);
+
+    final response = await _cloudinary.uploadFile(
+      CloudinaryFile.fromFile(
+        file.path,
+        resourceType: CloudinaryResourceType.Image,
+    )
+  );
+  return PickedImage(file: file, url: response.secureUrl);
+  }
+
+  Future<void> addItemwithImage(String name, int quantity, String? imageUrl) async {
+    await items. add(
+      {
+        'name': name,
+        'quantity': quantity,
+        'image_url': imageUrl,
+        'created_at': Timestamp. now()
+      }
+    );
   }
 
   Stream<QuerySnapshot> getItems() {
-    // Read items
     return items.orderBy('created_at', descending: true).snapshots();
   }
 
